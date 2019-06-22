@@ -19,4 +19,5 @@ Useful string functions -
 	- s.resize(new_size, 'any_character") resize the original string eith the new_size and if the new_size is greater than previous string length then the "any_character" is appended to make the string upto the new length".
 
 
-NOTE: Once the vector becomes full of elements it doubles its size and this doubling of size is very expensixe hence we should follow a approach of reserving the size of vector to some extent i.e. v.reserve(1000) it reserves 1000 blocks to the vector just like array and now the vector only doubles when all the 1000 blocks are occupied and we can observe that at higher size of vector the frequency of doubling operations lowers.
+NOTE: Once the vector becomes full of elements it doubles its size and this doubling of size is very expensixe hence we should follow a approach of reserving the size of vector to some extent i.e. v.reserve(1000) it reserves 1000 blocks to the vector just like array and now the vector only doubles when all the 1000 blocks are occupied and we can observe that at higher size of vector the frequency of doubling operations lowers. 
+v.clear() clears the vector that is the size of vector becomes 0.
