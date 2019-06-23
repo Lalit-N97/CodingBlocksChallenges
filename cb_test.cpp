@@ -11,9 +11,9 @@ typedef long long ll;
 
 class Point{
 public:
-	int x;
-	int y;
-	Point(int x, int y){
+	ll x;
+	ll y;
+	Point(ll x, ll y){
 		this->x = x;
 		this->y = y;
 	}
@@ -31,7 +31,8 @@ public:
 
 int main(){
 
-	int q, k, type, x, y, count = 0; 
+	int q, k, type, count = 0; 
+	ll x, y;
 	priority_queue<Point, vector<Point>, Compare> pq;
 	cin >> q >> k;
 
