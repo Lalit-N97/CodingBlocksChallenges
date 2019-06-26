@@ -1,65 +1,51 @@
 
 #include <iostream>
-#define MOD 1e9+7
 #include <algorithm>
 #include <queue>
 #include <cmath>
 #include <vector>
+#include <utility>  //pair, make_pair()
+#define MOD 1e9+7
 using namespace std;
 
 typedef long long ll;
-
-class Point{
-public:
-	ll x;
-	ll y;
-	Point(ll x, ll y){
-		this->x = x;
-		this->y = y;
-	}
-	ll dist(){
-		return x*x+y*y;
-	}
-};
-
-class Compare{
-public:
-	bool operator()(Point a, Point b){
-		return a.dist() < b.dist();
-	}
-};
+typedef pair<int, int> pair;
 
 int main(){
+	int n, k; 
+	cin >> n >> k;
+	int maxm = n;
+	int *code = new int[n];
+	vector<int> v(n+1, -1);
+	for (int i=0; i<n; i++){
+		cin >> code[i];
+		v[code[i]] = i;
+	} 
 
-	int q, k, type, count = 0; 
-	ll x, y;
-	priority_queue<Point, vector<Point>, Compare> pq;
-	cin >> q >> k;
+	int p = 0;
+	while(k && p<n){
+		if(code[p] != maxm){
+			int temp = code[p];
+			code[p] = maxm;
+			code[v[maxm]] = temp;
+			int tmp = v[temp];
+			v[temp] = v[code[p]];
+			v[code[p]] = tmp;
+		}
+		else k++;
+		k--;
+		p++;
+		maxm--;
+	}
 
-	while(q--){
-		cin >> type;
-		if (type == 1){
-			if (count != k){
-				count++;
-				cin >> x >> y;
-				Point p(x,y);
-				pq.push(p);
-			}
-			else {
-				cin >> x >> y;
-				Point p(x,y);
-				Point close = pq.top();
-				if (p.dist() < close.dist()){
-					pq.pop();
-					pq.push(p);
-				}
-				count = k;
-			}
-		}
-		else {
-			Point close = pq.top();
-			cout << close.dist() << "\n";
-		}
+	if (k%2!=0){
+		int temp = code[n-1];
+		code[n-1] = code[n-2];
+		code[n-2] = temp;
+	}
+
+	for (int i=0; i<n; i++){
+		cout << code[i] << " ";
 	}
 	return 0;
 }
